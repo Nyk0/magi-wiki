@@ -103,7 +103,7 @@ The shebang indicates that a submission script is a bash script. However, it tak
 * --mail-user: mail address of submitter;
 * --nodes: number of nodes required for the job;
 * --partition: name of the partition.
-* 
+
 Then, we can use sbatch command to submit the script:
 
 ```console
