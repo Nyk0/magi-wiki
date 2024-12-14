@@ -14,12 +14,15 @@ different partitions. A partition is a set of homogeneous compute nodes (ie comp
 | FORMATION | 2 | 2 x Intel(R) Xeon(R) Bronze 3204 CPU @ 1.90GHz (6 cores) | x | 48 GB | Ethernet 1 GB |
 
 We have three flavors of each partition:
-Regular means that your job can run forever;
-Short means that your job can run for 3 days, but you get an higher priority than Regular;
-Very short means that your job can run for 3 hours, but you get an higher priority than Short.
+* Regular means that your job can run forever;
+* Short means that your job can run for 3 days, but you get an higher priority than Regular;
+* Very short means that your job can run for 3 hours, but you get an higher priority than Short.
 
 To invoke a partition flavor you will use the partition name for regular (eg COMPUTE), the partition name with the suffix SHORT for short (eg COMPUTE-SHORT) and the partition name with the suffix VERYSHORT for very short (eg COMPUTE-VERYSHORT).
 
 ## SLURM quickstart howto
 
-We use SLURM (Simple Linux Utility for Resource Management) as the job scheduler for our HPC cluster.
+We use SLURM (Simple Linux Utility for Resource Management) as the job scheduler for our HPC cluster. In this section, we will introduce SLURM basic commands.
+
+### sinfo
+
