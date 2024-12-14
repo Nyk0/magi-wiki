@@ -20,6 +20,12 @@ We have three flavors of each partition:
 
 To invoke a partition flavor you will use the partition name for regular (eg COMPUTE), the partition name with the suffix SHORT for short (eg COMPUTE-SHORT) and the partition name with the suffix VERYSHORT for very short (eg COMPUTE-VERYSHORT).
 
+## Cite Magi in your publications
+
+This is how to cite Magi in your publications:
+
+* The experiments in this work were carried out on Magi, the experimental platform of University of Sorbonne Paris North (USPN) dedicated to research. This platform offers researchers at the institution High-Performance Computing (HPC), cloud and storage services. *
+
 ## SLURM quickstart howto
 
 We use SLURM (Simple Linux Utility for Resource Management) as the job scheduler for our HPC cluster. In this section, we will introduce SLURM basic commands.
