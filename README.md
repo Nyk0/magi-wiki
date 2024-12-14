@@ -24,7 +24,7 @@ To invoke a partition flavor you will use the partition name for regular (eg COM
 
 This is how to cite Magi in your publications:
 
-* The experiments in this work were carried out on Magi, the experimental platform of University of Sorbonne Paris North (USPN) dedicated to research. This platform offers researchers at the institution High-Performance Computing (HPC), cloud and storage services. *
+*The experiments in this work were carried out on Magi, the experimental platform of University of Sorbonne Paris North (USPN) dedicated to research. This platform offers researchers at the institution High-Performance Computing (HPC), cloud and storage services.*
 
 ## SLURM quickstart howto
 
