@@ -55,7 +55,6 @@ You can integrate your virtualenv in submission scripts like this:
 #SBATCH --job-name=venv-test
 #SBATCH --output=venv-test.out
 #SBATCH --error=venv-test.err
-#SBATCH --mail-type=end
 #SBATCH --partition=SMP-128c
 
 source <path to your virtualenv>/bin/activate
