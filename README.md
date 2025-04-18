@@ -9,7 +9,7 @@ different partitions. A partition is a set of homogeneous compute nodes (ie comp
 | MISC-56c | 15 | 2 x Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz (56 cores) | skylake | x | 96 GB | Ethernet 1 GB |
 | SMP-80c | 1 | 2 x Intel(R) Xeon(R) CPU E7-4820 v3 @ 1.90GHz (80 cores) | westmere | x | 512 GB | Ethernet 1 GB |
 | SMP-128c | 2 | 2 x AMD EPYC 7502 32-Core Processor (128 cores) | znver2 | x | 256 GB | Ethernet 1 GB |
-| SMP-256c | 2 | 2 x AMD EPYC 9554 64-Core Processor (256 cores) | znver4 | x | 1,6 TB | Ethernet 1 GB |
+| SMP-256c | 2 | 2 x AMD EPYC 9554 64-Core Processor (256 cores) | znver4 (not supported by our gcc, please use znver3) | x | 1,6 TB | Ethernet 1 GB |
 | GPU-A100 | 1 | 2 x AMD EPYC 7513 32-Core Processor (128 cores) | znver3 | 10 x NVIDIA A100 80 GB  | 512 GB | Ethernet 1 GB |
 | FORMATION | 2 | 2 x Intel(R) Xeon(R) Bronze 3204 CPU @ 1.90GHz (6 cores) | cascadelake | x | 48 GB | Ethernet 1 GB |
 
