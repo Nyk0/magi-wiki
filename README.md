@@ -4,7 +4,7 @@ Welcome to the Magi wiki. Here you will find documentation related to the Univer
 different partitions. A partition is a set of homogeneous compute nodes (ie computers that run your code). Here are the resources available on Magi for HPC part:
 
 | Partition name | Number of nodes | Processor | Arch | GPU | Memory | Network |
-| -- | -- | -- | -- | -- | -- |
+| -- | -- | -- | -- | -- | -- | -- |
 | COMPUTE | 51 | 2 x Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz (40 cores) | haswell | x | 64 GB | Infiniband |
 | MISC-56c | 15 | 2 x Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz (56 cores) | skylake | x | 96 GB | Ethernet 1 GB |
 | SMP-80c | 1 | 2 x Intel(R) Xeon(R) CPU E7-4820 v3 @ 1.90GHz (80 cores) | westmere | x | 512 GB | Ethernet 1 GB |
