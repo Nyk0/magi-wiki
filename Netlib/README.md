@@ -15,6 +15,9 @@ Feel free to explore /softs to see which Lapack and Scalapack are available.
 > [!NOTE]
 > You can find which partition runs which CPU architecture [here](https://github.com/Nyk0/magi-wiki/blob/main/README.md#welcome-to-magi).
 
+> [!NOTE]
+>In the following examples, you can notice that *-Wl,-t* are used in gcc. It's only to enlight that gcc used our custom instance of Netlib librairies.
+
 ## Compile and execute a matrix multiplication (C = A * B) with custom Blas
 
 ```console
@@ -30,7 +33,7 @@ Result matrix C:
 31.000000 46.000000
 ```
 
-## Compile and execute solving Ax = b (using dgesv) with custom Lapack:
+## Compile and execute solving Ax = b (using dgesv) with custom Lapack
 
 ```console
 nicolas.greneche@frontend:~$ gcc lapack.c -L/softs/lapack-cascadelake-3.12.1/lib \
