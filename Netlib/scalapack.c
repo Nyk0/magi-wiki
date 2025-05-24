@@ -66,7 +66,5 @@ int main(int argc, char **argv) {
     blacs_gridexit_(&ictxt);
     int zero = 0;
     blacs_exit_(&zero);
-
-    MPI_Finalize();
     return 0;
 }
