@@ -22,7 +22,7 @@ Feel free to explore /softs to see which Lapack and Scalapack are available.
 
 ```console
 nicolas.greneche@frontend:~$ gcc blas.c -L/softs/lapack-haswell-3.12.1/lib \
-      -lblas -lm -lgfortran -o blas -Wl,-t 2>&1 | grep blas
+   -lblas -lm -lgfortran -o blas -Wl,-t 2>&1 | grep blas
 /softs/lapack-haswell-3.12.1/lib/libblas.a
 ```
 
@@ -37,7 +37,7 @@ Result matrix C:
 
 ```console
 nicolas.greneche@frontend:~$ gcc lapack.c -L/softs/lapack-cascadelake-3.12.1/lib \
-      \textcolor{black}{-llapack -lblas -lm -lgfortran -o lapack -Wl,-t 2>&1 | grep lapack}
+   -llapack -lblas -lm -lgfortran -o lapack -Wl,-t 2>&1 | grep lapack
 /softs/lapack-cascadelake-3.12.1/lib/liblapack.a
 /softs/lapack-cascadelake-3.12.1/lib/libblas.a
 ```
@@ -57,9 +57,9 @@ nicolas.greneche@frontend:~$ module load /softs/modules/openmpi/cascadelake-5.0.
 
 ```console
 nicolas.greneche@frontend:~$ mpicc scalapack.c \
-      -L/softs/scalapack-cascadelake-2.2.2-openmpi-5.0.3-ucx-1.16.0/lib -lscalapack \
-      -L/softs/lapack-cascadelake-3.12.1/lib -llapack -lblas -lm -lgfortran \
-      -o scalapack -Wl,-t 2>&1 | grep lapack
+   -L/softs/scalapack-cascadelake-2.2.2-openmpi-5.0.3-ucx-1.16.0/lib -lscalapack \
+   -L/softs/lapack-cascadelake-3.12.1/lib -llapack -lblas -lm -lgfortran \
+   -o scalapack -Wl,-t 2>&1 | grep lapack
 /softs/scalapack-cascadelake-2.2.2-openmpi-5.0.3-ucx-1.16.0/lib/libscalapack.a
 /softs/lapack-cascadelake-3.12.1/lib/liblapack.a
 /softs/lapack-cascadelake-3.12.1/lib/libblas.a
