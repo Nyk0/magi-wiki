@@ -44,7 +44,7 @@ Result matrix C:
 
 Compilation:
 ```verbatim
-nicolas.greneche@frontend:~$ gcc lapack.c -L/softs/lapack-cascadelake-3.12.1/lib \
+gcc lapack.c -L/softs/lapack-cascadelake-3.12.1/lib \
    -llapack -lblas -lm -lgfortran -o lapack -Wl,-t 2>&1 | grep lapack
 ```
 
@@ -67,11 +67,16 @@ Solution x:
 nicolas.greneche@frontend:~$ module load /softs/modules/openmpi/cascadelake-5.0.3-ucx-1.16.0
 ```
 
-```console
-nicolas.greneche@frontend:~$ mpicc scalapack.c \
+Compilation:
+```verbatim
+mpicc scalapack.c \
    -L/softs/scalapack-cascadelake-2.2.2-openmpi-5.0.3-ucx-1.16.0/lib -lscalapack \
    -L/softs/lapack-cascadelake-3.12.1/lib -llapack -lblas -lm -lgfortran \
    -o scalapack -Wl,-t 2>&1 | grep lapack
+```
+
+Output:
+```
 /softs/scalapack-cascadelake-2.2.2-openmpi-5.0.3-ucx-1.16.0/lib/libscalapack.a
 /softs/lapack-cascadelake-3.12.1/lib/liblapack.a
 /softs/lapack-cascadelake-3.12.1/lib/libblas.a
