@@ -20,11 +20,18 @@ Feel free to explore /softs to see which Lapack and Scalapack are available.
 
 ## Compile and execute a matrix multiplication (C = A * B) with custom Blas
 
-```console
-nicolas.greneche@frontend:~$ gcc blas.c -L/softs/lapack-haswell-3.12.1/lib \
+Compilation:
+```bash
+gcc blas.c -L/softs/lapack-cascadelake-3.12.1/lib \
    -lblas -lm -lgfortran -o blas -Wl,-t 2>&1 | grep blas
-/softs/lapack-haswell-3.12.1/lib/libblas.a
 ```
+
+Output:
+```
+/softs/lapack-cascadelake-3.12.1/lib/libblas.a
+```
+
+We can see that our program is linked with local instance of Blas for cascadelake.
 
 ```console
 nicolas.greneche@frontend:~$ ./blas
