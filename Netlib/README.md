@@ -6,7 +6,11 @@ The Blas, Lapack, and Scalapack libraries are available on Magi, compiled for ea
 <library>-<architecture>-<version>[-suffix]
 ````
 
-For instance, Lapack version 3.12.1 compiled for haswell (-march=haswell) is *lapack-haswell-3.12.1*. With scalapack, the MPI compilation chain is also provided. For instance *scalapack-haswell-2.2.2-openmpi-5.0.3-ucx-1.16.0* means that it’s scalapack compiled for Intel haswell architecture version 2.2.2. The suffix *openmpi-5.0.3-ucx-1.16.0* means that openmpi version 5.0.3 compiled with ucx-1.16.0 was used. Feel free to explore /softs to see which Lapack and Scalapack are available.
+For instance, Lapack version 3.12.1 compiled for haswell (-march=haswell) is *lapack-haswell-3.12.1*.
+
+With scalapack, the MPI compilation chain is also provided. For instance *scalapack-haswell-2.2.2-openmpi-5.0.3-ucx-1.16.0* means that it’s scalapack compiled for Intel haswell architecture version 2.2.2. The suffix *openmpi-5.0.3-ucx-1.16.0* means that openmpi version 5.0.3 compiled with ucx-1.16.0 was used.
+
+Feel free to explore /softs to see which Lapack and Scalapack are available.
 
 > [!NOTE]
 > You can find which partition runs which CPU architecture [here](https://github.com/Nyk0/magi-wiki/blob/main/README.md#welcome-to-magi).
