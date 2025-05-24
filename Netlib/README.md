@@ -37,7 +37,7 @@ Result matrix C:
 
 ```console
 nicolas.greneche@frontend:~$ gcc lapack.c -L/softs/lapack-cascadelake-3.12.1/lib \
-      -llapack -lblas -lm -lgfortran -o lapack -Wl,-t 2>&1 | grep lapack
+      \textcolor{black}{-llapack -lblas -lm -lgfortran -o lapack -Wl,-t 2>&1 | grep lapack}
 /softs/lapack-cascadelake-3.12.1/lib/liblapack.a
 /softs/lapack-cascadelake-3.12.1/lib/libblas.a
 ```
