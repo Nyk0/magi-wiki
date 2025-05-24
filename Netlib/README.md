@@ -21,7 +21,7 @@ Feel free to explore /softs to see which Lapack and Scalapack are available.
 ## Compile and execute a matrix multiplication (C = A * B) with custom Blas
 
 Compilation:
-```bash
+```verbatim
 gcc blas.c -L/softs/lapack-cascadelake-3.12.1/lib \
    -lblas -lm -lgfortran -o blas -Wl,-t 2>&1 | grep blas
 ```
@@ -42,9 +42,14 @@ Result matrix C:
 
 ## Compile and execute solving Ax = b (using dgesv) with custom Lapack
 
-```console
+Compilation:
+```verbatim
 nicolas.greneche@frontend:~$ gcc lapack.c -L/softs/lapack-cascadelake-3.12.1/lib \
    -llapack -lblas -lm -lgfortran -o lapack -Wl,-t 2>&1 | grep lapack
+```
+
+Output:
+```
 /softs/lapack-cascadelake-3.12.1/lib/liblapack.a
 /softs/lapack-cascadelake-3.12.1/lib/libblas.a
 ```
