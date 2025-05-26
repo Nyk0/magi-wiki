@@ -12,7 +12,7 @@ PS C:\Users\Nyko> winget install Xming
 
 Once you have Xming installed, search for Xming in the Start Menu and run it. The process will run in the background and will show a system tray icon.
 
-> [NOTE!]
+> [!NOTE]
 > Xming does not start with your system automatically. You will need to start Xming each time you start your computer to use X11 forwarding.
 
 ## Using X11 Server
