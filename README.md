@@ -6,6 +6,7 @@ different partitions. A partition is a set of homogeneous compute nodes (ie comp
 | Partition name | Number of nodes | Processor | CPU Architecture | GPU | Memory | Network |
 | -- | -- | -- | -- | -- | -- | -- |
 | COMPUTE | 51 | 2 x Intel(R) Xeon(R) CPU E5-2650 v3 @ 2.30GHz (40 cores) | haswell | x | 64 GB | Infiniband |
+| COMPUTE2 | 11 | 2 x AMD EPYC 9655 96-Core Processor (384 cores) | znver5 (not supported by our gcc, please use znver3) | x | 756 GB | Infiniband |
 | MISC-56c | 15 | 2 x Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz (56 cores) | skylake | x | 96 GB | Ethernet 1 GB |
 | SMP-80c | 1 | 2 x Intel(R) Xeon(R) CPU E7-4820 v3 @ 1.90GHz (80 cores) | westmere | x | 512 GB | Ethernet 1 GB |
 | SMP-128c | 2 | 2 x AMD EPYC 7502 32-Core Processor (128 cores) | znver2 | x | 256 GB | Ethernet 1 GB |
