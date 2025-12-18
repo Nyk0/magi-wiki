@@ -57,6 +57,7 @@ To verify that the correct binaries are used:
 ```bash
 nicolas.greneche@frontend:~$ which mpirun
 /softs/openmpi-<arch>-<openmpi_version>-ucx-<ucx_version>/bin/mpirun
+
 nicolas.greneche@frontend:~$ which mpicc
 /softs/openmpi-<arch>-<openmpi_version>-ucx-<ucx_version>/bin/mpicc
 ```
@@ -65,84 +66,196 @@ You should see paths pointing to the module installation directory.
 
 ## 3. Compiling a Basic MPI Program
 
-### Example MPI Program (C)
-
-Create a file named `hello_mpi.c`:
-#include <mpi.h>#include <stdio.h>int main(int argc, char **argv){    int rank, size;    MPI_Init(&argc, &argv);    MPI_Comm_rank(MPI_COMM_WORLD, &rank);    MPI_Comm_size(MPI_COMM_WORLD, &size);    printf("Hello from rank %d out of %d\n", rank, size);    MPI_Finalize();    return 0;}
-### Compilation
+You can find some MPI codes [here](https://github.com/Nyk0/magi-wiki/tree/main/MPI/examples).
 
 Compile the program using the MPI compiler wrapper:
-mpicc hello_mpi.c -o hello_mpi
-The MPI wrapper automatically adds the correct include paths and libraries.
+
+```bash
+nicolas.greneche@frontend:~/mpi-test$ mpicc -o comm_mpi_test comm_mpi_test.c
+```
+
+The MPI wrapper automatically adds the correct include paths and libraries. You can test on the frontend node:
+
+```bash
+nicolas.greneche@frontend:~/mpi-test$ mpirun -np 2 ./comm_mpi_test
+=== MPI Sanity Check ===
+World size : 2 processes
+[P2P] RANK 0 sends "PING" to RANK 1
+[P2P] RANK 0 received "PONG" from RANK 1
+[BCAST] RANK 0 broadcasts value 42
+[BCAST] RANK 0 received value 42
+[REDUCE] sum of ranks+1 = 3 (expected = 3) to OK
+[ALLREDUCE] RANK 0 sees global sum = 3 (expected = 3) → OK
+[ALLGATHER] RANK 0 received : 0 1
+=== End of MPI Sanity Check ===
+[P2P] RANK 1 received "PING" from RANK 0
+[P2P] RANK 1 sends back "PONG" to RANK 0
+[BCAST] RANK 1 received value 42
+[ALLREDUCE] RANK 1 sees global sum = 3 (expected = 3) → OK
+[ALLGATHER] RANK 1 received : 0 1
+```
+
+> [!CAUTION]
+Do not exceed 2 workers (-np 2). The frontend node is not designed for heavy computation.
 
 ## 4. Interactive Execution with `srun`
 
 Interactive execution is useful for testing and debugging.
 
-### Request an Interactive Allocation
-salloc --nodes=2 --ntasks-per-node=4 --partition=compute
+```bash
+nicolas.greneche@frontend:~/mpi-test$ srun --partition=MISC-56c-VERYSHORT --nodes=2 --ntasks-per-node=2 ./comm_mpi_test
+=== MPI Sanity Check ===
+World size : 4 processes
+[P2P] RANK 0 sends "PING" to RANK 1
+[P2P] RANK 1 received "PING" from RANK 0
+[P2P] RANK 1 sends back "PONG" to RANK 0
+[P2P] RANK 0 received "PONG" from RANK 1
+[BCAST] RANK 0 broadcasts value 42
+[BCAST] RANK 0 received value 42
+[BCAST] RANK 1 received value 42
+[BCAST] RANK 2 received value 42
+[BCAST] RANK 3 received value 42
+[REDUCE] sum of ranks+1 = 10 (expected = 10) to OK
+[ALLREDUCE] RANK 0 sees global sum = 10 (expected = 10) → OK
+[ALLREDUCE] RANK 2 sees global sum = 10 (expected = 10) → OK
+[ALLREDUCE] RANK 1 sees global sum = 10 (expected = 10) → OK
+[ALLREDUCE] RANK 3 sees global sum = 10 (expected = 10) → OK
+[ALLGATHER] RANK 0 received : 0 1 2 3
+[ALLGATHER] RANK 2 received : 0 1 2 3
+[ALLGATHER] RANK 1 received : 0 1 2 3
+[ALLGATHER] RANK 3 received : 0 1 2 3
+=== End of MPI Sanity Check ===
+```
+
 This allocates:
-- 
-2 nodes
+- 2 nodes (--nodes=2)
+- 2 MPI tasks per node (--ntasks-per-node=2)
+- From MISC-56c-VERYSHORT partition (--partition=MISC-56c-VERYSHORT)
+- Total of **4** MPI processes
 
-- 
-4 MPI tasks per node
-
-- 
-Total of 8 MPI processes
-
-### Run the MPI Program
-
-Once the allocation is active:
-srun ./hello_mpi
-Slurm will:
-- 
-Launch one task per MPI process
-
-- 
-Bind tasks to CPUs according to the cluster policy
+Once the allocation is active, Slurm will:
+- Launch one task per MPI process
+- Bind tasks to CPUs according to the cluster policy
 
 OpenMPI will:
-- 
-Detect the Slurm environment
+- Detect the Slurm environment
+- Assign ranks automatically
 
-- 
-Assign ranks automatically
-
-You should see output similar to:
-Hello from rank 0 out of 8Hello from rank 1 out of 8...
 ## 5. Batch Submission Script Example
 
 Below is a minimal Slurm submission script for an MPI job.
-#!/bin/bash#SBATCH --job-name=mpi-hello#SBATCH --nodes=2#SBATCH --ntasks-per-node=4#SBATCH --time=00:05:00#SBATCH --partition=compute#SBATCH --output=mpi-%j.out#SBATCH --error=mpi-%j.errmodule purgemodule load openmpi/5.0.0srun ./hello_mpi
-### Submission
 
-Submit the job using:
-sbatch mpi_job.sh
+```bash
+nicolas.greneche@frontend:~/mpi-test$ cat run.slurm
+#!/bin/bash
+
+#SBATCH --job-name=comm_mpi_test
+#SBATCH --output=comm_mpi_test.out
+#SBATCH --error=comm_mpi_test.err
+#SBATCH --partition=MISC-56c-VERYSHORT
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=2
+
+module load /softs/modules/openmpi/<arch>-<openmpi_version>-ucx-<ucx_version>
+
+srun ./comm_mpi_test
+```
+
+> [!NOTE]
+You may recognize the ressources parameters of the previous section.
+
+Then, submit it:
+
+```bash
+nicolas.greneche@frontend:~/mpi-test$ sbatch run.slurm
+Submitted batch job 51101
+nicolas.greneche@frontend:~/mpi-test$
+```
+
+And check outputs:
+
+```bash
+nicolas.greneche@frontend:~/mpi-test$ cat comm_mpi_test.out
+=== MPI Sanity Check ===
+World size : 4 processes
+[P2P] RANK 0 sends "PING" to RANK 1
+[P2P] RANK 1 received "PING" from RANK 0
+[P2P] RANK 1 sends back "PONG" to RANK 0
+[P2P] RANK 0 received "PONG" from RANK 1
+[BCAST] RANK 0 broadcasts value 42
+[BCAST] RANK 0 received value 42
+[BCAST] RANK 1 received value 42
+[BCAST] RANK 2 received value 42
+[BCAST] RANK 3 received value 42
+[REDUCE] sum of ranks+1 = 10 (expected = 10) to OK
+[ALLREDUCE] RANK 0 sees global sum = 10 (expected = 10) → OK
+[ALLREDUCE] RANK 1 sees global sum = 10 (expected = 10) → OK
+[ALLREDUCE] RANK 2 sees global sum = 10 (expected = 10) → OK
+[ALLREDUCE] RANK 3 sees global sum = 10 (expected = 10) → OK
+[ALLGATHER] RANK 0 received : 0 1 2 3
+[ALLGATHER] RANK 2 received : 0 1 2 3
+[ALLGATHER] RANK 1 received : 0 1 2 3
+[ALLGATHER] RANK 3 received : 0 1 2 3
+=== End of MPI Sanity Check ===
+```
+
 ### Notes
-- 
-`--ntasks` or `--ntasks-per-node` controls the number of MPI processes
+- `--ntasks` or `--ntasks-per-node` controls the number of MPI processes
+- `srun` is the **recommended launcher** for OpenMPI on Slurm
+- No `mpirun` or `mpiexec` is needed (and should generally be avoided)
 
-- 
-`srun` is the **recommended launcher** for OpenMPI on Slurm
+## Caveats
 
-- 
-No `mpirun` or `mpiexec` is needed (and should generally be avoided)
+### Working with nodes embedding large number of cores
 
-## 6. Summary
-- 
-MPI programs consist of multiple parallel processes (workers/ranks)
+You may experience errors like:
 
-- 
-Slurm tasks map directly to MPI processes
+```bash
+[magi173:2375229:0:2375229] mm_ep.c:458 Assertion ucs_arbiter_group_is_empty(&ep->arb_group)' failed
+```
 
-- 
-Slurm handles resource allocation and process launching
+The observed crashes are caused by a UCX internal race condition in the shared-memory transports (mm/scopy), not by the application or MPI semantics themselves. Hyper-Threading is not the root cause, but it increases concurrency and therefore the likelihood of triggering this latent UCX bug, especially during collective operations that mix intra-node shared memory and inter-node InfiniBand communication. A stable mitigation is to keep UCX enabled while disabling the problematic shared-memory transports and explicitly selecting safe transports (e.g. UCX_TLS=self,rc,tcp), which preserves InfiniBand RDMA performance.
 
-- 
-OpenMPI integrates natively with Slurm
+In a nutshell, you may add the following environement variables in your submission script:
 
-- 
-Use `srun` for both interactive and batch MPI execution
+```bash
+nicolas.greneche@frontend:~/mpi-test$ cat run.slurm
+#!/bin/bash
 
-This model ensures correct placement, scalability, and accounting on the cluster.
+#SBATCH --job-name=comm_mpi_test
+#SBATCH --output=comm_mpi_test.out
+#SBATCH --error=comm_mpi_test.err
+#SBATCH --partition=MISC-56c-VERYSHORT
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=2
+
+export OMPI_MCA_pml=ucx
+export UCX_TLS=self,rc,tcp
+unset UCX_NET_DEVICES
+
+module load /softs/modules/openmpi/<arch>-<openmpi_version>-ucx-<ucx_version>
+
+srun ./comm_mpi_test
+```
+
+This lets UCX selects the Infiniband card port, wich is safe on Magi. Alternatively, you can pinpoint the network interface:
+
+```bash
+nicolas.greneche@frontend:~/mpi-test$ cat run.slurm
+#!/bin/bash
+
+#SBATCH --job-name=comm_mpi_test
+#SBATCH --output=comm_mpi_test.out
+#SBATCH --error=comm_mpi_test.err
+#SBATCH --partition=MISC-56c-VERYSHORT
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=2
+
+export OMPI_MCA_pml=ucx
+export UCX_TLS=self,rc,tcp
+export UCX_NET_DEVICES=mlx5_0:1
+
+module load /softs/modules/openmpi/<arch>-<openmpi_version>-ucx-<ucx_version>
+
+srun ./comm_mpi_test
+```
