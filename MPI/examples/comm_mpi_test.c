@@ -36,14 +36,14 @@ int main(int argc, char *argv[]) {
 
         if (rank == 0) {
             strcpy(msg, "PING");
-            printf("[P2P] RANK 0 envoie \"%s\" → RANK 1\n", msg);
+            printf("[P2P] RANK 0 sends \"%s\" to RANK 1\n", msg);
             fflush(stdout);
             err = MPI_Send(msg, (int)strlen(msg) + 1, MPI_CHAR, 1, 0, MPI_COMM_WORLD);
             check(err, "MPI_Send ping");
 
             err = MPI_Recv(msg, 64, MPI_CHAR, 1, 0, MPI_COMM_WORLD, &status);
             check(err, "MPI_Recv pong");
-            printf("[P2P] RANK 0 a reçu \"%s\" de RANK 1\n", msg);
+            printf("[P2P] RANK 0 received \"%s\" from RANK 1\n", msg);
             fflush(stdout);
         } else if (rank == 1) {
             err = MPI_Recv(msg, 64, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &status);
