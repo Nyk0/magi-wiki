@@ -2,10 +2,10 @@
 
 This document explains how to test the new version of Magi based on Debian Trixie (13).
 
-To begin, connect to the temporary frontend of the new environment. You can disable strict host key checking for this connection so that you do not run into SSH fingerprint issues later when the new node replaces the current one:
+To begin, connect to the temporary frontend of the new environment:
 
 ```bash
-ssh -o StrictHostKeyChecking=no -p 2822 <login>@magi-tmp.univ-paris13.fr
+ssh -p 2822 nicolas.greneche@magi-tmp.univ-paris13.fr
 ```
 
 ## 1. Make Sure You Are Using the New SLURM Instance
@@ -54,6 +54,17 @@ You can also verify which `srun` binary is being used:
 ```bash
 nicolas.greneche@frontend:~$ which srun
 /softs/trixie/x86-64/slurm/slurm-latest/bin/srun
+```
+
+You have two partitions COMPUTE and FORMATION with two nodes in each partition:
+
+```bash
+root@frontend:~# sinfo
+PARTITION         AVAIL  TIMELIMIT  NODES  STATE NODELIST
+COMPUTE*             up   infinite      2   idle magi[65-66]
+COMPUTE-SHORT        up 3-00:00:00      2   idle magi[65-66]
+COMPUTE-VERYSHORT    up    3:00:00      2   idle magi[65-66]
+FORMATION            up    3:00:00      2   idle magi[163-164]
 ```
 
 ## 2. New Software and Module Layout
