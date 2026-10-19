@@ -29,7 +29,7 @@ From this interface, you can:
 
    > You should receive an email shortly with further instructions.
 
-5. Check your mailbox. You should receive an email from [dsi-recherche@univ-paris13.fr](mailto:dsi-recherche@univ-paris13.fr) with the subject **Reset password**. The email contains a password-reset link pointing to [https://magiaccount.univ-spn.fr](https://magiaccount.univ-spn.fr), followed by a reset token.
+5. Check your mailbox. You should receive an email from dsi-recherche_AT_univ-paris13.fr with the subject **Reset password**. The email contains a password-reset link pointing to [https://magiaccount.univ-spn.fr](https://magiaccount.univ-spn.fr), followed by a reset token.
 6. Open the link. You will be redirected to a page asking you to enter and confirm your new password. Then click **Submit**.
 
 ## Updating your contact email address
@@ -43,7 +43,7 @@ From this interface, you can:
 
    > Confirmation email sent
 
-7. Check the mailbox associated with your new email address. You should receive an email from [dsi-recherche@univ-paris13.fr](mailto:dsi-recherche@univ-paris13.fr) with the subject **Verify new email**. The message contains a link pointing to [https://magiaccount.univ-spn.fr](https://magiaccount.univ-spn.fr), followed by a long verification token. Click the link.
+7. Check the mailbox associated with your new email address. You should receive an email from dsi-recherche_AT_univ-paris13.fr with the subject **Verify new email**. The message contains a link pointing to [https://magiaccount.univ-spn.fr](https://magiaccount.univ-spn.fr), followed by a long verification token. Click the link.
 8. Your request is then validated and your contact email address is updated.
 
 ## Updating your personal information
