@@ -1,3 +1,49 @@
+# Requesting an Account
+
+To request an account, send an email to dsi-recherche_AT_univ-paris13.fr.
+
+If you are not affiliated with USPN, you must have a sponsor with a USPN email address who can validate your registration. The easiest way is to include your sponsor in CC when sending your request.
+
+Once your MAGI account has been created, you will receive two emails from dsi-recherche_AT_univ-paris13.fr.
+
+## Password initialization email
+
+The first email has the subject:
+
+   > **Update Your account**
+
+and contains the following message:
+
+   > Your administrator has just requested that you update your Magi account by performing the following action(s): Update Password. Click on the link below to start this process.
+   >
+   > Link to account update
+   >
+   > This link will expire within 1 day.
+   >
+   > If you are unaware that your administrator has requested this, just ignore this message and nothing will be changed.
+
+This email contains a link that allows you to initialize your password.
+
+## Account creation email
+
+The second email has the subject:
+
+   > **Your MAGI account has been created**
+
+It contains your username and is similar to the following:
+
+   > Hello,
+   >
+   > Your MAGI account has been created.
+   >
+   > Username: nico  
+   > Account portal: https://magiaccount.univ-spn.fr/realms/magi/account/
+   >
+   > You will receive a separate email from the MAGI account portal containing a personal link to set your password. For security reasons, this link is generated and sent directly by Keycloak.
+   >
+   > Best regards,  
+   > MAGI / DSI Research Support Team
+
 # Magi Account Management
 
 The interface for managing your Magi account is available here:
